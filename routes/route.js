@@ -5,14 +5,20 @@ const { getAllCompanies, createCompany, updateCompany, deleteCompany } = require
 const routes = [
     {
         method: 'GET',
-        path: '/',
-        handler: getAllCompanies
+        path: '/company',
+        handler: getAllCompanies,
+        options: {
+            description: 'Get Company List',
+            tags: ['api']
+        }
     },
     {
         method: 'POST',
         path: '/company/create',
         handler: createCompany,
         options: {
+            description: 'Get Company List',
+            tags: ['api'],
             validate: {
                 payload: Joi.object({
                     name: Joi.string().required(),
@@ -27,11 +33,19 @@ const routes = [
         }
     },
     {
-        method: 'PATCH',
+        method: 'PUT',
         path: '/company/update/{id}',
         handler: updateCompany,
         options: {
+            description: 'Get Company List',
+            tags: ['api'],
             validate: {
+                payload: Joi.object({
+                    name: Joi.string(),
+                    type: Joi.string(),
+                    city: Joi.string(),
+                    headquarter: Joi.string(),
+                }),
                 params: Joi.object({
                     id: Joi.string().required()
                 }),
@@ -46,6 +60,8 @@ const routes = [
         path: '/company/delete/{id}',
         handler: deleteCompany,
         options: {
+            description: 'Get Company List',
+            tags: ['api'],
             validate: {
                 params: Joi.object({
                     id: Joi.string().required()
